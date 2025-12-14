@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Наші однокласники</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(120deg, #667eea, #764ba2);
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      transition: all 0.4s ease;
+      overflow: hidden;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 0.8s forwards;
+    }
+
+    /* верхня кольорова смужка */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 5px;
+      width: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    /* hover ефект */
+    .card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      background: #f5f7ff;
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 12px;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card h2 {
+      margin: 5px 0;
+      font-size: 1.3rem;
+      color: #5a4fcf;
+    }
+
+    .nickname {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: white;
+      opacity: 0.85;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Наші однокласники</h1>
+  <p>поставте 12 за семестр 🙏</p>
+</header>
+
+<section class="container" id="classmates"></section>
+
+<footer>
+  <p>Зроблено з ❤️ для нашого класу</p>
+</footer>
+
+<script>
+  const classmates = [
+    { name: "Кормишин Максим", photo: "images/kormyshyn.jpg", desc: "Прикольний хлопець, який дуже жорстко задротив Grow a Garden." },
+    { name: "Жмінковський Маркіян", photo: "images/markiyan.jpg", desc: "Потужний і серйозний хлопець з добрим серцем. З ним можна пограти в ігри на двох." },
+    { name: "Романчук Соломія", nick: "Солома", photo: "images/solomiya.jpg", desc: "Прикольна дівчина, яка прагне кращого майбутнього." },
+    { name: "Стецький Святослав", photo: "images/sviatoslav.jpg", desc: "Загадковий хлопець, який дуже рідко ходить до школи." },
+    { name: "Бурбан Максим", nick: "Масєм", photo: "images/maxym_b.jpg", desc: "Крутий хлопець, який завжди шукає пригод і нічого не боїться." },
+    { name: "Федячко Настя", photo: "images/nastia_f.jpg", desc: "Дуже розумна дівчина, улюблениця Галини Степанівни." },
+    { name: "Поворозник Таня", photo: "images/tania.jpg", desc: "Добра дівчина маленького зросту, яка має багато хлопців." },
+    { name: "Дмитрів Ярослав", photo: "images/yaroslav.jpg", desc: "Завжди на приколі, має мотоцикл і 8 з англійської." },
+    { name: "Дуда Дем'ян", photo: "images/demian.jpg", desc: "Кльовий хлопець, який інколи береться за розум." },
+    { name: "Харачко Тарас", nick: "Кабан", photo: "images/taras.jpg", desc: "Крутий хлопець з одним великим кубиком пресу." },
+    { name: "Зінько Марта", photo: "images/marta.jpg", desc: "Гарна дівчина, яка добре знає хімію." },
+    { name: "Андрущак Анастасія", photo: "images/anastasiia.jpg", desc: "Має подругу Віку — з ними не розлий вода." },
+    { name: "Вихопень Микола", photo: "images/mykola.jpg", desc: "Високий хлопець, круто грає у волейбол." },
+    { name: "Вихопень Орися", photo: "images/orysia.jpg", desc: "Гарно малює та добре знає англійську." },
+    { name: "Лоза Вероніка", photo: "images/veronika.jpg", desc: "Прикольна дівчина з двома кращими подругами." },
+    { name: "Котур Ангеліна", photo: "images/angelina.jpg", desc: "Любить фотографуватися і хоче бути вчителькою." },
+    { name: "Костик Вікторія", photo: "images/viktoriia_k.jpg", desc: "Добра, розумна, добре знає математику." },
+    { name: "Михайлишин Вікторія", photo: "images/viktoriia_m.jpg", desc: "Має кращу подругу Настю." },
+    { name: "Макар Роксолана", photo: "images/roksolana.jpg", desc: "Якимось дивом списала біологію на 11." },
+    { name: "Степанюк Софія", photo: "images/sofiia.jpg", desc: "Колись забула принести підставку до ялинки." },
+    { name: "Хоменко Юлія", photo: "images/yuliia.jpg", desc: "Загадкова, завжди сидить у телефоні." },
+    { name: "Ощипко Анна", photo: "images/anna.jpg", desc: "Дуже розумна, має хист до акторства." }
+  ];
+
+  const container = document.getElementById("classmates");
+
+  classmates.forEach((p, i) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.animationDelay = `${i * 0.05}s`;
+
+    card.innerHTML = `
+      <img src="${p.photo}" alt="${p.name}">
+      <h2>${p.name} ${p.nick ? `<span class="nickname">(${p.nick})</span>` : ""}</h2>
+      <p>${p.desc}</p>
+    `;
+
+    container.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
